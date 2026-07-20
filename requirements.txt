@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+pydantic[email]
+streamlit
+groq
+python-dotenv
+requests
+chromadb
+bcrypt
+python-jose[cryptography]
