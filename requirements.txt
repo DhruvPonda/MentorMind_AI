@@ -8,3 +8,6 @@ requests
 chromadb
 bcrypt
 python-jose[cryptography]
+langgraph
+langchain-groq
+langchain-core

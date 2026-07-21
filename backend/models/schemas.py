@@ -2,7 +2,7 @@ from pydantic import BaseModel, EmailStr
 from typing import Optional, Dict, List
 
 
-# ─── Authentication ──────────────────────────────────────────────
+# ─── Authentication ──────────────────────────────────────────────────
 
 class RegisterRequest(BaseModel):
     name: str
@@ -22,7 +22,7 @@ class TokenResponse(BaseModel):
     name: str
 
 
-# ─── Chat ────────────────────────────────────────────────────────
+# ─── Chat ────────────────────────────────────────────────────────────
 
 class ChatRequest(BaseModel):
     question: str
@@ -32,9 +32,21 @@ class ChatResponse(BaseModel):
     answer: str
     topic: str
     mastery_scores: Dict[str, float]
+    next_topics: List[str] = []
+    quiz: Optional[List[Dict]] = None
+    report: Optional[str] = None
+    learning_path: List[Dict] = []
 
 
-# ─── Student Profile ─────────────────────────────────────────────
+# ─── Quiz ────────────────────────────────────────────────────────────
+
+class QuizQuestion(BaseModel):
+    question: str
+    options: List[str]
+    correct_answer: str
+
+
+# ─── Student Profile ────────────────────────────────────────────────
 
 class MasteryScoreResponse(BaseModel):
     topic: str
@@ -54,7 +66,7 @@ class StudentProfileResponse(BaseModel):
     weaknesses: List[str]
 
 
-# ─── Assessment ──────────────────────────────────────────────────
+# ─── Assessment ──────────────────────────────────────────────────────
 
 class AssessmentResult(BaseModel):
     understanding_score: float
