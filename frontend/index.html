@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MentorMind AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧠</text></svg>">
+</head>
+<body>
+    <div id="app">
+        <!-- Auth View -->
+        <div id="auth-view" class="view-container active">
+            <div class="glass-panel auth-panel">
+                <div class="auth-header">
+                    <h1 class="logo"><span>🧠</span> MentorMind AI</h1>
+                    <p class="subtitle">Your personal AI tutor with long-term memory</p>
+                </div>
+                
+                <!-- Login Form -->
+                <form id="login-form" class="auth-form active">
+                    <h2>Login to your account</h2>
+                    <div class="input-group">
+                        <label for="login-email">Email</label>
+                        <input type="email" id="login-email" placeholder="you@example.com" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="primary-btn">Sign In</button>
+                    <p class="switch-auth">Don't have an account? <a href="#" id="go-register">Create Account</a></p>
+                </form>
+
+                <!-- Register Form -->
+                <form id="register-form" class="auth-form hidden">
+                    <h2>Create an account</h2>
+                    <div class="input-group">
+                        <label for="register-name">Full Name</label>
+                        <input type="text" id="register-name" placeholder="John Doe" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="register-email">Email</label>
+                        <input type="email" id="register-email" placeholder="you@example.com" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="register-password">Password</label>
+                        <input type="password" id="register-password" placeholder="••••••••" required>
+                    </div>
+                    <button type="submit" class="primary-btn">Sign Up</button>
+                    <p class="switch-auth">Already have an account? <a href="#" id="go-login">Sign In</a></p>
+                </form>
+                
+                <div id="auth-error" class="error-msg hidden"></div>
+            </div>
+            
+            <!-- Aesthetic Background Elements -->
+            <div class="blob blob-1"></div>
+            <div class="blob blob-2"></div>
+            <div class="blob blob-3"></div>
+        </div>
+
+        <!-- Main Dashboard View -->
+        <div id="main-view" class="view-container hidden">
+            <aside class="sidebar glass-panel">
+                <div class="profile-section">
+                    <div class="avatar">👤</div>
+                    <div class="user-info">
+                        <h3 id="user-name">User Name</h3>
+                        <p id="user-id">ID: 00000000</p>
+                    </div>
+                </div>
+                
+                <div class="sidebar-section">
+                    <h4>⚡ Quick Actions</h4>
+                    <div class="quick-actions">
+                        <button class="action-btn" id="btn-quiz">📝 Quiz Me</button>
+                        <button class="action-btn" id="btn-report">📋 Report</button>
+                        <button class="action-btn" id="btn-plan">🗺️ Study Plan</button>
+                        <button class="action-btn" id="btn-refresh">🔄 Refresh</button>
+                    </div>
+                </div>
+
+                <div class="sidebar-section mastery-section">
+                    <h4>📊 Mastery Dashboard</h4>
+                    <div id="mastery-container" class="mastery-list">
+                        <!-- Mastery items will be injected here -->
+                    </div>
+                </div>
+
+                <button id="logout-btn" class="logout-btn">🚪 Logout</button>
+            </aside>
+
+            <main class="chat-area glass-panel">
+                <header class="chat-header">
+                    <h2>🧠 MentorMind AI Tutor</h2>
+                    <p id="chat-subtitle">I remember our past conversations and adapt to your learning style.</p>
+                </header>
+
+                <div id="chat-container" class="messages-container">
+                    <!-- Messages will appear here -->
+                </div>
+
+                <div class="chat-input-area">
+                    <form id="chat-form">
+                        <input type="text" id="chat-input" placeholder="Ask a question, request a quiz, or get your progress report..." autocomplete="off">
+                        <button type="submit" id="send-btn" class="send-btn">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            </main>
+            
+            <!-- Aesthetic Background Elements for Dashboard -->
+            <div class="blob blob-dashboard-1"></div>
+            <div class="blob blob-dashboard-2"></div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
