@@ -36,6 +36,7 @@ class ChatResponse(BaseModel):
     quiz: Optional[List[Dict]] = None
     report: Optional[str] = None
     learning_path: List[Dict] = []
+    sources: List[Dict] = []  # RAG source references
 
 
 # ─── Quiz ────────────────────────────────────────────────────────────
@@ -73,3 +74,18 @@ class AssessmentResult(BaseModel):
     confidence: float
     misconceptions: List[str]
     recommendation: str
+
+
+# ─── RAG ─────────────────────────────────────────────────────────────
+
+class RAGSearchRequest(BaseModel):
+    question: str
+    subject: Optional[str] = None
+    class_level: Optional[int] = None
+    n_results: int = 5
+
+
+class RAGSearchResponse(BaseModel):
+    documents: List[Dict]
+    query: str
+    count: int

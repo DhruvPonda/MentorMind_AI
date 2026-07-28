@@ -134,6 +134,20 @@ def planner_node(state: dict) -> dict:
     for t, s in mastery_flat.items():
         context += f"- {t}: {s:.0%}\n"
 
+    # Add available textbook chapters from RAG documents
+    rag_documents = state.get("rag_documents", [])
+    available_chapters = set()
+    for doc in rag_documents:
+        meta = doc.get("metadata", {})
+        if meta.get("chapter"):
+            subject = meta.get("subject", "").title()
+            class_lvl = meta.get("class_level", "")
+            chapter = meta["chapter"]
+            available_chapters.add(f"{subject} Class {class_lvl} - {chapter}")
+
+    if available_chapters:
+        context += f"\nAvailable textbook chapters: {', '.join(sorted(available_chapters))}\n"
+
     context += "\nCandidate topics (from prerequisite graph):\n"
     for rt in ready_topics[:10]:
         context += (

@@ -47,6 +47,18 @@ async def chat_endpoint(
     else:  # chat
         answer = result.get("tutor_response", "I couldn't generate a response.")
 
+    # Extract RAG source references for citation
+    sources = []
+    for doc in result.get("rag_documents", []):
+        meta = doc.get("metadata", {})
+        if meta:
+            sources.append({
+                "class_level": meta.get("class_level"),
+                "subject": meta.get("subject", "").title(),
+                "chapter": meta.get("chapter", ""),
+                "page": meta.get("page"),
+            })
+
     return ChatResponse(
         answer=answer,
         topic=result.get("topic", "general"),
@@ -55,4 +67,5 @@ async def chat_endpoint(
         quiz=result.get("quiz"),
         report=result.get("report"),
         learning_path=result.get("learning_path", []),
+        sources=sources,
     )

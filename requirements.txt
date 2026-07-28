@@ -11,3 +11,6 @@ python-jose[cryptography]
 langgraph
 langchain-groq
 langchain-core
+pypdf
+langchain-text-splitters
+sentence-transformers

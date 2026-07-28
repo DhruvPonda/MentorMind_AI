@@ -5,6 +5,7 @@ from contextlib import asynccontextmanager
 from backend.database import init_db
 from backend.routes.chat import router as chat_router
 from backend.routes.students import router as student_router
+from backend.routes.rag import router as rag_router
 
 
 @asynccontextmanager
@@ -27,6 +28,7 @@ app.add_middleware(
 
 app.include_router(chat_router)
 app.include_router(student_router)
+app.include_router(rag_router)
 
 
 @app.get("/")

@@ -19,6 +19,10 @@ class MentorState(TypedDict, total=False):
     memories: List[Dict]
     memory_context: str
 
+    # ─── RAG Context (set by retrieve_context node) ─────────────────
+    rag_documents: List[Dict]   # Raw retrieved chunks with metadata
+    rag_context: str            # Formatted textbook context for prompts
+
     # ─── Supervisor ─────────────────────────────────────────────────
     route: str  # "chat" | "quiz" | "report" | "plan"
 

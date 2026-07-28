@@ -28,7 +28,10 @@ Core Teaching Rules:
 5. If the question is mathematical, show calculations step by step.
 6. End explanations with a short summary.
 7. Reference past conversations when relevant to show continuity.
-8. Adapt your difficulty level based on the student's mastery scores."""
+8. Adapt your difficulty level based on the student's mastery scores.
+9. When provided with textbook content, use it as your PRIMARY source for answers.
+10. If the answer is not in the provided textbook content, clearly state that your explanation is based on general knowledge.
+11. Cite the source (class, subject, chapter) when using textbook content."""
 
 
 def _build_system_prompt(
@@ -82,10 +85,14 @@ def tutor_node(state: dict) -> dict:
         mastery_scores=profile.get("mastery_scores") if profile else None,
     )
 
-    # Build user message with memory context
+    rag_context = state.get("rag_context", "")
+
+    # Build user message with memory + RAG context
     user_content = ""
     if memory_context:
         user_content += f"{memory_context}\n\n---\n\n"
+    if rag_context:
+        user_content += f"{rag_context}\n\n---\n\n"
     user_content += f"Student's Question: {question}"
 
     try:

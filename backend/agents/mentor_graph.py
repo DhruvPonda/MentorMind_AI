@@ -28,10 +28,18 @@ def retrieve_context_node(state: dict) -> dict:
     memories = retrieve_memories(student_id, question)
     memory_context = build_memory_context(memories)
 
+    # Retrieve relevant NCERT textbook content via RAG
+    from backend.rag.retriever import retrieve_documents, build_rag_context
+
+    rag_documents = retrieve_documents(question)
+    rag_context = build_rag_context(rag_documents)
+
     return {
         "student_profile": profile,
         "memories": memories,
         "memory_context": memory_context,
+        "rag_documents": rag_documents,
+        "rag_context": rag_context,
     }
 
 
@@ -157,6 +165,8 @@ def run_mentor_graph(student_id: str, question: str) -> dict:
         "next_topics": [],
         "learning_path": [],
         "report": None,
+        "rag_documents": [],
+        "rag_context": "",
     }
 
     final_state = mentor_graph.invoke(

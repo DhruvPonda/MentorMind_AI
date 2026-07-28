@@ -41,6 +41,7 @@ IMPORTANT: Respond with ONLY valid JSON, no other text."""
 
 QUIZ_PROMPT = """You are a quiz generation agent for MentorMind AI.
 Generate exactly 3 quiz questions about the given topic, appropriate for the student's mastery level.
+When textbook content is provided, generate questions ONLY from that content. Do NOT invent questions about topics not covered in the provided content.
 
 Return ONLY a JSON array:
 [
@@ -158,11 +159,15 @@ def _handle_quiz(
     topic = detect_topic(question, "")
     mastery = get_mastery_for_topic(student_id, topic)
 
+    rag_context = state.get("rag_context", "")
+
     context = (
         f"Topic: {topic}\n"
         f"Student mastery level: {mastery:.0%}\n"
         f"Student request: {question}"
     )
+    if rag_context:
+        context += f"\n\nTextbook Content:\n{rag_context}"
 
     try:
         response = llm.invoke([
